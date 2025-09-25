@@ -10,14 +10,20 @@ Bun.serve({
     if (!reader) {
       return new Response("No body", { status: 400 });
     }
+
+    async function read() {
+      const { value, done } = await reader!.read();
+      if (done) return null;
+      return new TextDecoder().decode(value);
+    }
     let sum = 0;
     const stream = new ReadableStream({
       async start(controller) {
         while (1) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          console.log({ value: toNum(value), done });
-          if (value) sum += toNum(value);
+          const value = await read();
+          if (!value) break;
+          console.log({ value: Number(value) });
+          if (value) sum += Number(value);
           controller.enqueue(sum.toString());
         }
         controller.close();
