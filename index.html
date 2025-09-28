@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  Testing chunk encoding with fetch and ReadableStream on web browsers.
+  <br />
+  But it seems does not work on Chrome with error: net::ERR_FAILED
+
+  <script>
+
+    async function connectWithoutBody() {
+      const response = await fetch('/', {
+        method: 'POST',
+      });
+      const reader = response.body.getReader();
+
+      const {value} = await reader.read();
+      const text = new TextDecoder().decode(value);
+      console.log('[no-body] Received', text);
+
+      console.log('[no-body] Response fully received');
+    }
+
+    async function main() {
+      var globalController;
+      const response = await fetch('/', {
+        method: 'POST',
+        duplex: 'half',
+        body: new ReadableStream({
+          start(controller) {
+            globalController = controller;
+          }
+        })
+      });
+      const reader = response.body.getReader();
+
+      const {value} = await reader.read();
+      const text = new TextDecoder().decode(value);
+      console.log('[main] Received', text);
+
+      console.log('[main] Response fully received');
+    }
+
+    main();
+    connectWithoutBody();
+  </script>
+</body>
+
+</html>

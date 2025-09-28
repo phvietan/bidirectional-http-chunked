@@ -8,5 +8,9 @@
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "scripts": {
+    "server": "PORT=10000 bun run src/server.ts",
+    "client": "bun run src/client.ts"
   }
 }

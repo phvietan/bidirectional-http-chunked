@@ -1,5 +1,7 @@
 # dependencies (bun install)
 node_modules
+key.crt
+key.key
 
 # output
 out
