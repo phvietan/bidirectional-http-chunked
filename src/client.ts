@@ -2,10 +2,10 @@ import { type ReadableStreamController } from "bun";
 import { ReadableStream } from "stream/web";
 import { POW, readUntil } from "./common";
 
-async function main() {
+async function main(url: string) {
   let globalController!: ReadableStreamController<any>;
 
-  const response = await fetch("https://bi-http.drstrange.org:10000/", {
+  const response = await fetch(url, {
     method: "POST",
     body: new ReadableStream({
       async start(controller) {
@@ -61,4 +61,4 @@ async function main() {
 }
 
 // Example usage
-main();
+main("https://bi-http.drstrange.org:10001/");
