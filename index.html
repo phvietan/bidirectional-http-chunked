@@ -8,9 +8,15 @@
 </head>
 
 <body>
-  Testing chunk encoding with fetch and ReadableStream on web browsers.
+  Please see console for output
   <br />
-  But it seems does not work on Chrome with error: net::ERR_FAILED
+  --------------------------------------------
+  <br />
+  The main fetch with body should throw error because browser does not allow both response and request to be chunked
+  <br />
+  The fetch without body should went through, but server response "Request does not have body" and not run the challenge
+  <br />
+  --------------------------------------------
 
   <script>
 

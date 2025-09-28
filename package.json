@@ -1,5 +1,5 @@
 {
-  "name": "test-chunk",
+  "name": "bidirectional-http-chunked",
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -11,6 +11,7 @@
   },
   "scripts": {
     "server": "PORT=10000 bun run src/server.ts",
+    "server:prod": "pm2 start 'bun run server' --name bidirectional-http-chunked",
     "client": "bun run src/client.ts"
   }
 }
