@@ -61,4 +61,4 @@ async function main(url: string) {
 }
 
 // Example usage
-main("https://bi-http.drstrange.org:10001/");
+main("https://bi-http.drstrange.org:10000/");
